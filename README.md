@@ -26,6 +26,7 @@
 - Python 2.7
 - PyQt4 para Python 2.7
 - PyInstaller
+- Microsoft Visual C++ 2010 Redistributable
 
 ###### Execute o PyInstaller para compilar o programa:
 
