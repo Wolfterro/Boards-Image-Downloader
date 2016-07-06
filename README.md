@@ -33,7 +33,7 @@
       pyinstaller --noconsole --onefile "Boards Image Downloader.py"
       
       - Windows
-      pyinstaller --icon="BID-Icon.ico" --noconsole --onefile "Boards Image Downloader.pyw"
+      pyinstaller --icon="BID-Icon.ico" --noconsole --onefile "Boards Image Downloader.py"
 
 #### Binário:
 - ***Linux:*** Pode ser executado diretamente, sem qualquer requisito ou dependência.
