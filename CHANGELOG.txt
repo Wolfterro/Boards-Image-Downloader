@@ -1,0 +1,18 @@
+Boards Image Downloader
+=======================
+
+Um simples programa em PyQt4 que baixa imagens e vídeos de várias Imageboards!
+------------------------------------------------------------------------------
+
+CHANGELOG:
+==========
+
+VERSÃO 1.1 - Linux/Windows:
+- Adicionado botão "Cancelar". Ao pressionar o botão, o processo de download será interrompido.
+
+#-------------------------------------------------------------------------------------------------------------------
+
+VERSÃO 1.0 - Linux/Windows:
+- Versão inicial do programa.
+
+#-------------------------------------------------------------------------------------------------------------------
