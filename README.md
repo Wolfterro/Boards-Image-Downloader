@@ -18,6 +18,8 @@
 
 ![Boards Image Downloader](https://raw.githubusercontent.com/Wolfterro/wolfterro.github.io/master/posts/img/imagens_de_projetos/boards_image_downloader.png)
 
+### [Verifique o CHANGELOG para maiores informações sobre novas versões](https://raw.github.com/Wolfterro/Boards-Image-Download/master/CHANGELOG.txt)
+
 ### Requisitos:
 
 #### Compilando:
@@ -39,8 +41,8 @@
 
 ### Download:
 
-#### Linux: https://github.com/Wolfterro/Boards-Image-Downloader/releases/tag/v1.0-Linux
+#### Linux: https://github.com/Wolfterro/Boards-Image-Downloader/releases/tag/v1.1-Linux
 
-#### Windows: https://github.com/Wolfterro/Boards-Image-Downloader/releases/tag/v1.0-Windows
+#### Windows: https://github.com/Wolfterro/Boards-Image-Downloader/releases/tag/v1.1-Windows
 
 ###### Caso não possua o git e queira também baixar o repositório por completo, baixe através deste [Link](https://github.com/Wolfterro/Boards-Image-Downloader/archive/master.zip) ou clique em "Clone or Download", no topo da página.
