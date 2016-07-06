@@ -18,7 +18,7 @@
 
 ![Boards Image Downloader](https://raw.githubusercontent.com/Wolfterro/wolfterro.github.io/master/posts/img/imagens_de_projetos/boards_image_downloader.png)
 
-### [Verifique o CHANGELOG para maiores informações sobre novas versões](https://raw.github.com/Wolfterro/Boards-Image-Download/master/CHANGELOG.txt)
+### [Verifique o CHANGELOG para maiores informações sobre novas versões](https://raw.github.com/Wolfterro/Boards-Image-Downloader/master/CHANGELOG.txt)
 
 ### Requisitos:
 
