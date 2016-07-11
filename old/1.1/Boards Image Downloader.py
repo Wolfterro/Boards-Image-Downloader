@@ -26,8 +26,8 @@ SOFTWARE.
 
 #===================================
 # Criado por: Wolfterro
-# Versão: 1.2 - Python 2.x
-# Data: 11/07/2016
+# Versão: 1.1 - Python 2.x
+# Data: 06/07/2016
 #===================================
 
 from PyQt4 import QtCore, QtGui
@@ -48,7 +48,7 @@ sys.setdefaultencoding('utf-8')
 
 # Definindo Versão do Programa e determinando a pasta 'home' do usuário.
 # ======================================================================
-version = "1.2"
+version = "1.1"
 home_dir = expanduser("~")
 
 # Codificação do programa.
@@ -147,7 +147,7 @@ class Ui_MainWindow(object):
         self.label.setText(_translate("MainWindow", "Imageboard Website:", None))
         self.comboBox.setToolTip(_translate("MainWindow", "<html><head/><body><p>Escolha a Imageboard desejada</p></body></html>", None))
         self.comboBox.setItemText(0, _translate("MainWindow", "4chan - http://www.4chan.org", None))
-        self.comboBox.setItemText(1, _translate("MainWindow", "8chan - https://8ch.net", None))
+        self.comboBox.setItemText(1, _translate("MainWindow", "8chan - https://8ch.pl", None))
         self.comboBox.setItemText(2, _translate("MainWindow", "55chan - https://55chan.org", None))
         self.comboBox.setItemText(3, _translate("MainWindow", "BRchan - http://www.brchan.org", None))
         self.comboBox.setItemText(4, _translate("MainWindow", "GUROchan - https://www.gurochan.ch", None))
@@ -209,7 +209,7 @@ class Ui_MainWindow(object):
         if str(self.getImageBoardValue) == "4chan":
             return "https://a.4cdn.org/%s/thread/%s.json" % (self.getBoardValue, self.getThreadNumber)
         elif str(self.getImageBoardValue) == "8chan":
-            return "https://8ch.net/%s/res/%s.json " % (self.getBoardValue, self.getThreadNumber)
+            return "https://8ch.pl/%s/res/%s.json " % (self.getBoardValue, self.getThreadNumber)
         elif str(self.getImageBoardValue) == "55chan":
             return "https://55chan.org/%s/res/%s.json " % (self.getBoardValue, self.getThreadNumber)
         elif str(self.getImageBoardValue) == "BRchan":
@@ -225,7 +225,7 @@ class Ui_MainWindow(object):
         if str(self.getImageBoardValue) == "4chan":
             return "http://i.4cdn.org/%s/%s" % (self.getBoardValue, str(self.image))
         elif str(self.getImageBoardValue) == "8chan":
-            return "https://media.8ch.net/%s/src/%s" % (self.getBoardValue, str(self.image))
+            return "https://8ch.pl/%s/src/%s" % (self.getBoardValue, str(self.image))
         elif str(self.getImageBoardValue) == "55chan":
             return "https://55chan.org/%s/src/%s" % (self.getBoardValue, str(self.image))
         elif str(self.getImageBoardValue) == "BRchan":
