@@ -26,7 +26,7 @@
 - Python 2.7
 - PyQt4 para Python 2.7
 - PyInstaller
-- Microsoft Visual C++ 2010 Redistributable
+- Microsoft Visual C++ 2010 Redistributable (Windows apenas)
 
 ###### Execute o PyInstaller para compilar o programa:
 
@@ -42,8 +42,8 @@
 
 ### Download:
 
-#### Linux: https://github.com/Wolfterro/Boards-Image-Downloader/releases/tag/v1.1-Linux
+#### Linux: https://github.com/Wolfterro/Boards-Image-Downloader/releases/tag/v1.2-Linux
 
-#### Windows: https://github.com/Wolfterro/Boards-Image-Downloader/releases/tag/v1.1-Windows
+#### Windows: https://github.com/Wolfterro/Boards-Image-Downloader/releases/tag/v1.2-Windows
 
 ###### Caso não possua o git e queira também baixar o repositório por completo, baixe através deste [Link](https://github.com/Wolfterro/Boards-Image-Downloader/archive/master.zip) ou clique em "Clone or Download", no topo da página.
