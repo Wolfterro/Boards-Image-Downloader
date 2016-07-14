@@ -26,8 +26,8 @@ SOFTWARE.
 
 #===================================
 # Criado por: Wolfterro
-# Versão: 1.3 - Python 2.x
-# Data: 14/07/2016
+# Versão: 1.2 - Python 2.x
+# Data: 11/07/2016
 #===================================
 
 from PyQt4 import QtCore, QtGui
@@ -37,7 +37,6 @@ import os
 import sys
 import ssl
 import json
-import ctypes
 import urllib2
 import platform
 import subprocess
@@ -49,13 +48,8 @@ sys.setdefaultencoding('utf-8')
 
 # Definindo Versão do Programa e determinando a pasta 'home' do usuário.
 # ======================================================================
-version = "1.3"
-if platform.system() == "Windows":
-    buf = ctypes.create_unicode_buffer(1024)
-    ctypes.windll.kernel32.GetEnvironmentVariableW(u"USERPROFILE", buf, 1024)
-    home_dir = buf.value
-else:
-    home_dir = expanduser("~")
+version = "1.2"
+home_dir = expanduser("~")
 
 # Codificação do programa.
 # ========================

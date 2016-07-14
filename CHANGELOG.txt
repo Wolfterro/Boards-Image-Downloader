@@ -7,6 +7,11 @@ Um simples programa em PyQt4 que baixa imagens e vídeos de várias Imageboards!
 CHANGELOG:
 ==========
 
+VERSÃO 1.3 - Windows:
+- Alterado o modo que o programa recupera a pasta 'home' do usuário.
+
+#-------------------------------------------------------------------------------------------------------------------
+
 VERSÃO 1.2 - Linux/Windows:
 - Alterado o domínio do 8chan, usará o '8ch.net' ao invés do alternativo '8ch.pl'.
 
