@@ -42,8 +42,8 @@
 
 ### Download:
 
-#### Linux: https://github.com/Wolfterro/Boards-Image-Downloader/releases/tag/v1.2-Linux
+#### Linux: https://github.com/Wolfterro/Boards-Image-Downloader/releases/tag/v1.3-Linux
 
-#### Windows: https://github.com/Wolfterro/Boards-Image-Downloader/releases/tag/v1.2-Windows
+#### Windows: https://github.com/Wolfterro/Boards-Image-Downloader/releases/tag/v1.3-Windows
 
 ###### Caso não possua o git e queira também baixar o repositório por completo, baixe através deste [Link](https://github.com/Wolfterro/Boards-Image-Downloader/archive/master.zip) ou clique em "Clone or Download", no topo da página.
