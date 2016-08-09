@@ -7,6 +7,11 @@ Um simples programa em PyQt4 que baixa imagens e vídeos de várias Imageboards!
 CHANGELOG:
 ==========
 
+VERSÃO 1.4 - Linux/Windows:
+- Adicionado indicador de tópico arquivado. Caso o tópico esteja arquivado, o programa irá avisar nas informações do tópico.
+
+#-------------------------------------------------------------------------------------------------------------------
+
 VERSÃO 1.3 - Windows:
 - Alterado o modo que o programa recupera a pasta 'home' do usuário.
 

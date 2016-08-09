@@ -26,8 +26,8 @@ SOFTWARE.
 
 #===================================
 # Criado por: Wolfterro
-# Versão: 1.4 - Python 2.x
-# Data: 09/08/2016
+# Versão: 1.3 - Python 2.x
+# Data: 14/07/2016
 #===================================
 
 from PyQt4 import QtCore, QtGui
@@ -49,7 +49,7 @@ sys.setdefaultencoding('utf-8')
 
 # Definindo Versão do Programa e determinando a pasta 'home' do usuário.
 # ======================================================================
-version = "1.4"
+version = "1.3"
 if platform.system() == "Windows":
     buf = ctypes.create_unicode_buffer(1024)
     ctypes.windll.kernel32.GetEnvironmentVariableW(u"USERPROFILE", buf, 1024)
@@ -282,11 +282,7 @@ class Ui_MainWindow(object):
         self.url = self.getJsonURL(self.getBoardValue, self.getThreadNumber)
         self.data = self.getJson(self.url)
         try:
-            for self.archived in self.data['posts']:
-                if 'archived' in self.archived:
-                    return [self.data['posts'], True]
-                else:
-                    return [self.data['posts'], False]
+            return self.data['posts']
         except Exception:
             self.textEdit.append(u"[Downloader] ERRO! Erro ao recuperar posts do tópico %s em /%s/!" % (self.getThreadNumber, self.getBoardValue))
             QtGui.QApplication.processEvents()
@@ -318,15 +314,11 @@ class Ui_MainWindow(object):
     # Método para processar e resgatar valores do tópico escolhido.
     # =============================================================
     def processThread(self, getBoardValue, getThreadNumber):
-        self.textEdit.append(u"[Downloader] Fazendo download em /%s/ do tópico %s ..." % (self.getBoardValue, self.getThreadNumber))
+        self.textEdit.append(u"[Downloader] Fazendo download em /%s/ do tópico %s" % (self.getBoardValue, self.getThreadNumber))
         QtGui.QApplication.processEvents()
 
-        self.posts, self.isArchived = self.getPosts(self.getBoardValue, self.getThreadNumber)
+        self.posts = self.getPosts(self.getBoardValue, self.getThreadNumber)
         self.images = self.getImagesFromPosts(self.posts)
-
-        if self.isArchived == True:
-            self.textEdit.append(u"[Downloader] O tópico %s está arquivado!" % (self.getThreadNumber))
-            QtGui.QApplication.processEvents()
 
         self.textEdit.append(u"[Downloader] Encontrada %d imagens em %d posts:" % (len(self.images), len(self.posts)))
         self.textEdit.append("\n===============================================\n")
