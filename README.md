@@ -37,13 +37,16 @@
       pyinstaller --icon="BID-Icon.ico" --noconsole --onefile "Boards Image Downloader.py"
 
 #### Binário:
-- ***Linux:*** Pode ser executado diretamente, sem qualquer requisito ou dependência.
-- ***Windows:*** Requer o Microsoft Visual C++ 2010 Redistributable instalado (provavelmente já vem instalado em sistemas atualizados).
+- ***Linux:*** 
+- (x86): Pode ser executado diretamente, sem qualquer requisito ou dependência.
+- (x64): Requer bibliotecas de compatibilidade com binários em x86 (i386).
+- ***Windows:*** 
+- (x86 e x64): Requer o Microsoft Visual C++ 2010 Redistributable instalado (provavelmente já vem instalado em sistemas atualizados).
 
 ### Download:
 
-#### Linux: https://github.com/Wolfterro/Boards-Image-Downloader/releases/tag/v1.4-Linux
+#### Linux: https://github.com/Wolfterro/Boards-Image-Downloader/releases/tag/v1.5-Linux
 
-#### Windows: https://github.com/Wolfterro/Boards-Image-Downloader/releases/tag/v1.4-Windows
+#### Windows: https://github.com/Wolfterro/Boards-Image-Downloader/releases/tag/v1.5-Windows
 
 ###### Caso não possua o git e queira também baixar o repositório por completo, baixe através deste [Link](https://github.com/Wolfterro/Boards-Image-Downloader/archive/master.zip) ou clique em "Clone or Download", no topo da página.
