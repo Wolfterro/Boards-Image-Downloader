@@ -7,6 +7,11 @@ Um simples programa em PyQt4 que baixa imagens e vídeos de várias Imageboards!
 CHANGELOG:
 ==========
 
+VERSÃO 1.5 - Linux/Windows:
+- 8chan: Nova URL para imagens adicionada. Antiga URL ainda está presente para tópicos mais antigos.
+
+#-------------------------------------------------------------------------------------------------------------------
+
 VERSÃO 1.4 - Linux/Windows:
 - Adicionado indicador de tópico arquivado. Caso o tópico esteja arquivado, o programa irá avisar nas informações do tópico.
 

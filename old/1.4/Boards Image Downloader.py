@@ -26,8 +26,8 @@ SOFTWARE.
 
 #===================================
 # Criado por: Wolfterro
-# Versão: 1.5 - Python 2.x
-# Data: 30/08/2016
+# Versão: 1.4 - Python 2.x
+# Data: 09/08/2016
 #===================================
 
 from PyQt4 import QtCore, QtGui
@@ -49,7 +49,7 @@ sys.setdefaultencoding('utf-8')
 
 # Definindo Versão do Programa e determinando a pasta 'home' do usuário.
 # ======================================================================
-version = "1.5"
+version = "1.4"
 if platform.system() == "Windows":
     buf = ctypes.create_unicode_buffer(1024)
     ctypes.windll.kernel32.GetEnvironmentVariableW(u"USERPROFILE", buf, 1024)
@@ -228,31 +228,16 @@ class Ui_MainWindow(object):
     # Método para determinar a URL das imagens da Imageboard escolhida.
     # =================================================================
     def getImageURL(self, getBoardValue, image):
-        # 4chan
-        # =====
         if str(self.getImageBoardValue) == "4chan":
             return "http://i.4cdn.org/%s/%s" % (self.getBoardValue, str(self.image))
-        # 8chan - Nova e antiga URL
-        # =========================
         elif str(self.getImageBoardValue) == "8chan":
-            if len(str(self.image)) >= 32:
-                return "https://media.8ch.net/file_store/%s" % (str(self.image))
-            else:
-                return "https://media.8ch.net/%s/src/%s" % (self.getBoardValue, str(self.image))
-        # 55chan
-        # ======
+            return "https://media.8ch.net/%s/src/%s" % (self.getBoardValue, str(self.image))
         elif str(self.getImageBoardValue) == "55chan":
             return "https://55chan.org/%s/src/%s" % (self.getBoardValue, str(self.image))
-        # BRChan
-        # ======
         elif str(self.getImageBoardValue) == "BRchan":
             return "http://www.brchan.org/%s/src/%s" % (self.getBoardValue, str(self.image))
-        # GUROchan
-        # ========
         elif str(self.getImageBoardValue) == "GUROchan":
             return "https://www.gurochan.ch/%s/src/%s" % (self.getBoardValue, str(self.image))
-        # NULL
-        # ====
         else:
             return ""
 
