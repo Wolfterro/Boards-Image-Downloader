@@ -7,6 +7,16 @@ Um simples programa em PyQt4 que baixa imagens e vídeos de várias Imageboards!
 CHANGELOG:
 ==========
 
+VERSÃO 1.6 - Linux/Windows:
+- BUGFIX:
+--- Consertado resgate de informações em ProcessThread(), impedindo que o programa trave caso não encontre o tópico.
+
+- Adicionado informações de MD5 (quando houver) para cada arquivo durante o download.
+- Resolução máxima desbloqueada. Padrão inicial de 550x550.
+- Informações redundantes removidas.
+
+#-------------------------------------------------------------------------------------------------------------------
+
 VERSÃO 1.5 - Linux/Windows:
 - 8chan: Nova URL para imagens adicionada. Antiga URL ainda está presente para tópicos mais antigos.
 

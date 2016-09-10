@@ -26,8 +26,8 @@ SOFTWARE.
 
 #===================================
 # Criado por: Wolfterro
-# Versão: 1.6 - Python 2.x
-# Data: 09/09/2016
+# Versão: 1.5 - Python 2.x
+# Data: 30/08/2016
 #===================================
 
 from PyQt4 import QtCore, QtGui
@@ -49,7 +49,7 @@ sys.setdefaultencoding('utf-8')
 
 # Definindo Versão do Programa e determinando a pasta 'home' do usuário.
 # ======================================================================
-version = "1.6"
+version = "1.5"
 if platform.system() == "Windows":
     buf = ctypes.create_unicode_buffer(1024)
     ctypes.windll.kernel32.GetEnvironmentVariableW(u"USERPROFILE", buf, 1024)
@@ -81,8 +81,8 @@ class Ui_MainWindow(object):
         self.cancel = False
 
         MainWindow.setObjectName(_fromUtf8("MainWindow"))
-        MainWindow.resize(550, 550)
-        # MainWindow.setMaximumSize(QtCore.QSize(550, 550))
+        MainWindow.resize(500, 550)
+        MainWindow.setMaximumSize(QtCore.QSize(500, 550))
         icon = QtGui.QIcon()
         icon.addPixmap(QtGui.QPixmap(_fromUtf8("BID-Icon.ico")), QtGui.QIcon.Normal, QtGui.QIcon.Off)
         MainWindow.setWindowIcon(icon)
@@ -268,7 +268,7 @@ class Ui_MainWindow(object):
             self.response = urllib2.urlopen(self.request, context=self.context)
             self.data = json.loads(self.response.read())
         except Exception:
-            self.textEdit.append(u"[Downloader] ERRO! Erro ao recuperar .json em %s!" % (self.url))
+            self.textEdit.append(u"[Downloader] ERRO! Erro ao recuperar .json para %s!" % (self.url))
             return {}
         return self.data
 
@@ -307,26 +307,20 @@ class Ui_MainWindow(object):
             QtGui.QApplication.processEvents()
             return []
 
-    # Método para resgatar as imagens dos posts e o hash MD5 das imagens.
+    # Método para resgatar as imagens dos posts.
     # Para Imageboards com suporte a múltiplas imagens por post ou apenas uma imagem por post.
-    # Algumas imageboards não possuem informações de hash das imagens!
     # ========================================================================================
     def getImagesFromPosts(self, posts):
         self.imagesList = []
-        self.md5sumList = []
         for self.p in self.posts:
             if 'tim' in self.p and 'ext' in self.p:
                 self.imagesList.append('%s%s' % (self.p['tim'], self.p['ext']))
-                if 'md5' in self.p:
-                    self.md5sumList.append('%s' % (self.p['md5']))
 
             if 'extra_files' in self.p:
                 for self.extra in self.p['extra_files']:
                     self.imagesList.append('%s%s' % (self.extra['tim'], self.extra['ext']))
-                    if 'md5' in self.extra:
-                        self.md5sumList.append('%s' % (self.extra['md5']))
         
-        return self.imagesList, self.md5sumList
+        return self.imagesList
 
     # Método para resgatar a URL das imagens dos posts e seus nomes.
     # ==============================================================
@@ -342,11 +336,8 @@ class Ui_MainWindow(object):
         self.textEdit.append(u"[Downloader] Fazendo download em /%s/ do tópico %s ..." % (self.getBoardValue, self.getThreadNumber))
         QtGui.QApplication.processEvents()
 
-        try:
-            self.posts, self.isArchived = self.getPosts(self.getBoardValue, self.getThreadNumber)
-            self.images, self.md5hashes = self.getImagesFromPosts(self.posts)
-        except Exception:
-            return
+        self.posts, self.isArchived = self.getPosts(self.getBoardValue, self.getThreadNumber)
+        self.images = self.getImagesFromPosts(self.posts)
 
         if self.isArchived == True:
             self.textEdit.append(u"[Downloader] O tópico %s está arquivado!" % (self.getThreadNumber))
@@ -357,34 +348,20 @@ class Ui_MainWindow(object):
         QtGui.QApplication.processEvents()
 
         self.downloaded = 0
-        self.hashpos = 0
 
         for self.image in self.images:
             
             self.checkImagesInDir = os.path.isfile(str(self.image))
             if self.checkImagesInDir == True:
                 self.downloaded += 1
-                if self.md5hashes == []:
-                    self.textEdit.append(u"Imagem %s - [N/D] -- [%d/%d] já existe! Pulando ..." % (
-                        str(self.image), self.downloaded, len(self.images)))
-                    QtGui.QApplication.processEvents()
-                else:
-                    self.textEdit.append(u"Imagem %s - [%s] -- [%d/%d] já existe! Pulando ..." % (
-                        str(self.image), self.md5hashes[self.hashpos], self.downloaded, len(self.images)))
-                    QtGui.QApplication.processEvents()
-                    self.hashpos += 1
+                self.textEdit.append(u"Imagem '%s' %d/%d em /%s/ do tópico %s já existe! Pulando ..." % (
+                    str(self.image), self.downloaded, len(self.images), self.getBoardValue, self.getThreadNumber))
+                QtGui.QApplication.processEvents()
             else:
                 self.downloaded += 1
-                if self.md5hashes == []:
-                    self.textEdit.append(u"Baixando %s - [N/D] -- Imagem [%d/%d] ..." % (
-                        str(self.image), self.downloaded, len(self.images)))
-                    QtGui.QApplication.processEvents()
-                else:
-                    self.textEdit.append(u"Baixando %s - [%s] -- Imagem [%d/%d] ..." % (
-                        str(self.image), self.md5hashes[self.hashpos], self.downloaded, len(self.images)))
-                    QtGui.QApplication.processEvents()
-                    self.hashpos += 1
-                
+                self.textEdit.append(u"Baixando %s - Imagem %d/%d em /%s/ do tópico %s ..." % (
+                    str(self.image), self.downloaded, len(self.images), self.getBoardValue, self.getThreadNumber))
+                QtGui.QApplication.processEvents()
                 self.status = self.downloadImage(self.getBoardValue, self.image)
                 if self.status == False:
                     break
@@ -403,13 +380,13 @@ class Ui_MainWindow(object):
         self.getOutputDir = self.lineEdit_3.text()
 
         if self.getBoardValue == "":
-            self.textEdit.append(u"[Downloader] Erro! Falta a board onde o tópico está!")
+            self.textEdit.append(u"[Downloader] Erro! Falta a board onde o tópico está!!")
             return
         elif self.getThreadNumber == "":
-            self.textEdit.append(u"[Downloader] Erro! Falta a ID do tópico!")
+            self.textEdit.append(u"[Downloader] Erro! Falta a ID do tópico!!")
             return
         elif self.getOutputDir == "":
-            self.textEdit.append(u"[Downloader] Erro! Falta o caminho para a pasta de destino!")
+            self.textEdit.append(u"[Downloader] Erro! Falta o caminho para a pasta de destino!!")
             return
         else:
             self.pushButton.setEnabled(False)
@@ -430,7 +407,7 @@ class Ui_MainWindow(object):
             self.pushButton.repaint()
             QtGui.QApplication.processEvents()
 
-            self.textEdit.append(u"\n[Downloader] Processo de Download Finalizado!")
+            self.textEdit.append(u"[Downloader] Processo de Download Finalizado!")
             QtGui.QApplication.processEvents()
 
             if platform.system() == "Windows":
