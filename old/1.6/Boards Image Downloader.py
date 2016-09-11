@@ -26,8 +26,8 @@ SOFTWARE.
 
 #===================================
 # Criado por: Wolfterro
-# Versão: 1.7 - Python 2.x
-# Data: 11/09/2016
+# Versão: 1.6 - Python 2.x
+# Data: 09/09/2016
 #===================================
 
 from PyQt4 import QtCore, QtGui
@@ -49,7 +49,7 @@ sys.setdefaultencoding('utf-8')
 
 # Definindo Versão do Programa e determinando a pasta 'home' do usuário.
 # ======================================================================
-version = "1.7"
+version = "1.6"
 if platform.system() == "Windows":
     buf = ctypes.create_unicode_buffer(1024)
     ctypes.windll.kernel32.GetEnvironmentVariableW(u"USERPROFILE", buf, 1024)
@@ -81,7 +81,8 @@ class Ui_MainWindow(object):
         self.cancel = False
 
         MainWindow.setObjectName(_fromUtf8("MainWindow"))
-        MainWindow.resize(550, 600)
+        MainWindow.resize(550, 550)
+        # MainWindow.setMaximumSize(QtCore.QSize(550, 550))
         icon = QtGui.QIcon()
         icon.addPixmap(QtGui.QPixmap(_fromUtf8("BID-Icon.ico")), QtGui.QIcon.Normal, QtGui.QIcon.Off)
         MainWindow.setWindowIcon(icon)
@@ -135,26 +136,14 @@ class Ui_MainWindow(object):
         self.pushButton_2.setObjectName(_fromUtf8("pushButton"))
         self.pushButton_2.clicked.connect(self.cancelDownload)
         self.gridLayout.addWidget(self.pushButton_2, 6, 0, 1, 3)
-        self.progressBar = QtGui.QProgressBar(self.centralwidget)
-        self.progressBar.setProperty("value", 0)
-        self.progressBar.setAlignment(QtCore.Qt.AlignCenter)
-        self.progressBar.setObjectName(_fromUtf8("progressBar"))
-        self.gridLayout.addWidget(self.progressBar, 7, 0, 1, 3)
         MainWindow.setCentralWidget(self.centralwidget)
         self.menubar = QtGui.QMenuBar(MainWindow)
         self.menubar.setGeometry(QtCore.QRect(0, 0, 400, 20))
         self.menubar.setObjectName(_fromUtf8("menubar"))
-        self.menuOp_es = QtGui.QMenu(self.menubar)
-        self.menuOp_es.setObjectName(_fromUtf8("menuOp_es"))
         MainWindow.setMenuBar(self.menubar)
         self.statusbar = QtGui.QStatusBar(MainWindow)
         self.statusbar.setObjectName(_fromUtf8("statusbar"))
         MainWindow.setStatusBar(self.statusbar)
-        self.actionCriar_Subpasta_Para_O_T_pico = QtGui.QAction(MainWindow)
-        self.actionCriar_Subpasta_Para_O_T_pico.setCheckable(True)
-        self.actionCriar_Subpasta_Para_O_T_pico.setObjectName(_fromUtf8("actionCriar_Subpasta_Para_O_T_pico"))
-        self.menuOp_es.addAction(self.actionCriar_Subpasta_Para_O_T_pico)
-        self.menubar.addAction(self.menuOp_es.menuAction())
 
         self.retranslateUi(MainWindow)
         QtCore.QMetaObject.connectSlotsByName(MainWindow)
@@ -181,8 +170,6 @@ class Ui_MainWindow(object):
         self.pushButton.setText(_translate("MainWindow", "Download", None))
         self.pushButton_2.setToolTip(_translate("MainWindow", "<html><head/><body><p>Cancelar o download das imagens</p></body></html>", None))
         self.pushButton_2.setText(_translate("MainWindow", "Cancelar", None))
-        self.menuOp_es.setTitle(_translate("MainWindow", "Opções", None))
-        self.actionCriar_Subpasta_Para_O_T_pico.setText(_translate("MainWindow", "Criar Subpasta Para o Tópico", None))
 
     #========================================================================================
     # Métodos de Download: Procedimentos de Resgate de Valores e Download das Imagens
@@ -220,18 +207,6 @@ class Ui_MainWindow(object):
         else:
             os.makedirs(unicode(self.getOutputDir))
             os.chdir(unicode(self.getOutputDir))
-        return
-
-    # Método de criação de subpasta para o tópico desejado.
-    # Este método só é executado quando a opção de subpasta está selecionada.
-    # =======================================================================
-    def createSubfolder(self, semantic_url, getThreadNumber):
-        self.subFolderName = "%s-[%s]" % (self.semantic_url, self.getThreadNumber)
-        if os.path.exists(unicode(self.subFolderName)):
-            os.chdir(unicode(self.subFolderName))
-        else:
-            os.makedirs(unicode(self.subFolderName))
-            os.chdir(unicode(self.subFolderName))
         return
 
     # Método para determinar a URL do arquivo .json da Imageboard escolhida.
@@ -297,20 +272,10 @@ class Ui_MainWindow(object):
             return {}
         return self.data
 
-    # Método para calcular o progresso do download dos arquivos.
-    # O método resgata o valor da barra e incrementa com o valor de cada progresso.
-    # =============================================================================
-    def setProgress(self, fsizefile, downloadedSoFar):
-        self.oldValue = self.progressBar.value()
-        self.progress = float(self.downloadedSoFar) / float(self.fsizefile)
-        self.percent = self.progress * 100.0
-        self.progressBar.setProperty("value", self.percent)
-        QtGui.QApplication.processEvents()
-
     # Método de download das imagens da Imageboard, board e tópico escolhidos.
     # Para arquivos grandes, o processamento deste método pode congelar a janela até o processo terminar!
     # ===================================================================================================
-    def downloadWithoutProgress(self, imageUrl, filename, fsizefile):
+    def downloadWithoutProgress(self, imageUrl, filename):
         if self.cancel == True:
             self.textEdit.append(u"[Downloader] Cancelado!!")
             QtGui.QApplication.processEvents()
@@ -318,15 +283,12 @@ class Ui_MainWindow(object):
         else:
             self.imageRequest = urllib2.Request(self.imageUrl, headers={'User-agent' : 'BID/1.0'})
             self.imageResponse = urllib2.urlopen(self.imageRequest, context=self.context)
-            self.downloadedSoFar = 0
             with open(str(self.filename), 'wb') as self.file:
                 while True:
-                    self.imageData = self.imageResponse.read(4096)
-                    self.downloadedSoFar += len(self.imageData)
+                    self.imageData = self.imageResponse.read()
                     if not self.imageData:
                         break
                     self.file.write(self.imageData)
-                    self.setProgress(self.fsizefile, self.downloadedSoFar)
             return True
 
     # Método para resgatar a quantidade de posts no tópico escolhido.
@@ -352,42 +314,26 @@ class Ui_MainWindow(object):
     def getImagesFromPosts(self, posts):
         self.imagesList = []
         self.md5sumList = []
-        self.fsizeList = []
         for self.p in self.posts:
             if 'tim' in self.p and 'ext' in self.p:
                 self.imagesList.append('%s%s' % (self.p['tim'], self.p['ext']))
                 if 'md5' in self.p:
                     self.md5sumList.append('%s' % (self.p['md5']))
-                if 'fsize' in self.p:
-                    self.fsizeList.append('%s' % (self.p['fsize']))
 
             if 'extra_files' in self.p:
                 for self.extra in self.p['extra_files']:
                     self.imagesList.append('%s%s' % (self.extra['tim'], self.extra['ext']))
                     if 'md5' in self.extra:
                         self.md5sumList.append('%s' % (self.extra['md5']))
-                    if 'fsize' in self.extra:
-                        self.fsizeList.append('%s' % (self.extra['fsize']))
         
-        return self.imagesList, self.md5sumList, self.fsizeList
-
-    # Método para recuperar a URL semântica do tópico desejado. É apenas utilizado quando
-    # a opção de subpasta para o tópico está selecionada.
-    # Algumas imageboards podem não conter este valor, neste caso o método retorna o nome "Tópico".
-    # =============================================================================================
-    def getSemanticURL(self, posts):
-        for self.sURL in self.posts:
-            if 'semantic_url' in self.sURL:
-                return self.sURL['semantic_url']
-            else:
-                return "Tópico"
+        return self.imagesList, self.md5sumList
 
     # Método para resgatar a URL das imagens dos posts e seus nomes.
     # ==============================================================
-    def downloadImage(self, getBoardValue, image, fsizefile):
+    def downloadImage(self, getBoardValue, image):
         self.imageUrl = self.getImageURL(self.getBoardValue, self.image)
         self.filename = os.path.join(str(self.image))
-        self.downloadStatus = self.downloadWithoutProgress(self.imageUrl, self.filename, self.fsizefile)
+        self.downloadStatus = self.downloadWithoutProgress(self.imageUrl, self.filename)
         return self.downloadStatus
 
     # Método para processar e resgatar valores do tópico escolhido.
@@ -398,13 +344,9 @@ class Ui_MainWindow(object):
 
         try:
             self.posts, self.isArchived = self.getPosts(self.getBoardValue, self.getThreadNumber)
-            self.images, self.md5hashes, self.fsizes = self.getImagesFromPosts(self.posts)
+            self.images, self.md5hashes = self.getImagesFromPosts(self.posts)
         except Exception:
             return
-
-        if self.actionCriar_Subpasta_Para_O_T_pico.isChecked() == True:
-            self.semantic_url = self.getSemanticURL(self.posts)
-            self.createSubfolder(self.semantic_url, self.getThreadNumber)
 
         if self.isArchived == True:
             self.textEdit.append(u"[Downloader] O tópico %s está arquivado!" % (self.getThreadNumber))
@@ -416,41 +358,34 @@ class Ui_MainWindow(object):
 
         self.downloaded = 0
         self.hashpos = 0
-        self.fsizepos = -1
 
         for self.image in self.images:
             
             self.checkImagesInDir = os.path.isfile(str(self.image))
-
-            if self.checkImagesInDir == True or str(self.image) == "deleted":
+            if self.checkImagesInDir == True:
                 self.downloaded += 1
                 if self.md5hashes == []:
                     self.textEdit.append(u"Imagem %s - [N/D] -- [%d/%d] já existe! Pulando ..." % (
                         str(self.image), self.downloaded, len(self.images)))
                     QtGui.QApplication.processEvents()
-                    self.fsizepos += 1
                 else:
                     self.textEdit.append(u"Imagem %s - [%s] -- [%d/%d] já existe! Pulando ..." % (
                         str(self.image), self.md5hashes[self.hashpos], self.downloaded, len(self.images)))
                     QtGui.QApplication.processEvents()
                     self.hashpos += 1
-                    self.fsizepos += 1
             else:
                 self.downloaded += 1
                 if self.md5hashes == []:
                     self.textEdit.append(u"Baixando %s - [N/D] -- Imagem [%d/%d] ..." % (
                         str(self.image), self.downloaded, len(self.images)))
                     QtGui.QApplication.processEvents()
-                    self.fsizepos += 1
                 else:
                     self.textEdit.append(u"Baixando %s - [%s] -- Imagem [%d/%d] ..." % (
                         str(self.image), self.md5hashes[self.hashpos], self.downloaded, len(self.images)))
                     QtGui.QApplication.processEvents()
                     self.hashpos += 1
-                    self.fsizepos += 1
                 
-                self.fsizefile = int(self.fsizes[self.fsizepos])
-                self.status = self.downloadImage(self.getBoardValue, self.image, self.fsizefile)
+                self.status = self.downloadImage(self.getBoardValue, self.image)
                 if self.status == False:
                     break
 
@@ -480,7 +415,6 @@ class Ui_MainWindow(object):
             self.pushButton.setEnabled(False)
             self.pushButton.setText(_translate("MainWindow", "Downloading...", None))
             self.pushButton.repaint()
-            self.progressBar.setProperty("value", 0)
             QtGui.QApplication.processEvents()
 
             self.checkOutputDir(self.getOutputDir)
@@ -496,8 +430,7 @@ class Ui_MainWindow(object):
             self.pushButton.repaint()
             QtGui.QApplication.processEvents()
 
-            self.textEdit.append("\n===============================================\n")
-            self.textEdit.append(u"[Downloader] Processo de Download Finalizado!")
+            self.textEdit.append(u"\n[Downloader] Processo de Download Finalizado!")
             QtGui.QApplication.processEvents()
 
             if platform.system() == "Windows":
