@@ -7,6 +7,15 @@ Um simples programa em PyQt4 que baixa imagens e vídeos de várias Imageboards!
 CHANGELOG:
 ==========
 
+VERSÃO 1.7 - Linux/Windows:
+- Adicionado menu de opções no programa.
+- Adicionada barra de progresso para os downloads.
+
+- Adicionada opção para criar subpasta para os arquivos do tópico:
+--- A subpasta será criada com o nome da URL semântica e a ID do tópico. Caso o nome não exista, o nome será "Tópico".
+
+#-------------------------------------------------------------------------------------------------------------------
+
 VERSÃO 1.6 - Linux/Windows:
 - BUGFIX:
 --- Consertado resgate de informações em ProcessThread(), impedindo que o programa trave caso não encontre o tópico.
