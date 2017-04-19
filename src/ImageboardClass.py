@@ -49,7 +49,7 @@ class Imageboard(object):
 	# ===============================
 	def __init__(self, jsonAPI, imgURL, board):
 		# Propriedades da classe
-        # ----------------------
+		# ----------------------
 		self.jsonAPI = jsonAPI
 		self.posts = None
 		self.postsNum = 0
