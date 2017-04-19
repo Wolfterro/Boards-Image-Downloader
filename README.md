@@ -38,7 +38,7 @@
 - PyInstaller
 - Microsoft Visual C++ 2010 Redistributable (Windows apenas)
 
-###### Para compilar o programa, basta executar o script build.bat (Windows) ou build.sh (Linux/BSD/Outros).
+##### Para compilar o programa, basta executar o script build.bat (Windows) ou build.sh (Linux/BSD/Outros).
 ##### ***OBS:*** É necessário que o programa pyinstaller seja reconhecido como comando interno no prompt de comando (Windows) ou no shell que estiver usando (Linux/BSD/Outros), caso contrário os scripts para compilar o programa irão falhar!
 
 #### Binário:
