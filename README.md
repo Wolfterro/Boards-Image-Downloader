@@ -30,7 +30,7 @@
 
 ![Boards Image Downloader](http://i.imgur.com/wfy9U48.png)
 
-### [Verifique o CHANGELOG para maiores informações sobre novas versões!](https://raw.github.com/Wolfterro/Boards-Image-Downloader/master/CHANGELOG.txt)
+### [Verifique o CHANGELOG.txt para maiores informações sobre novas versões!](https://raw.github.com/Wolfterro/Boards-Image-Downloader/master/CHANGELOG.txt)
 
 ### Requisitos:
 
