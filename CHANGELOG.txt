@@ -7,6 +7,35 @@ Um simples programa em PyQt4 que baixa imagens e vídeos de várias Imageboards!
 CHANGELOG:
 ==========
 
+VERSÃO 2.0 - Linux/Windows:
+- Nova estrutura no código-fonte do programa:
+--- Criação de diferentes classes para diferentes tipos de métodos:
+------ BoardsImageDownloader.py - Classe da janela principal.
+------ ConfigLoaderClass.py - Classe do carregador de configurações de imageboards.
+------ DownloaderClass.py - Classe responsável por baixar arquivos do tópico e resgatar a API em .json.
+------ GlobalVars.py - Classe de variáveis globais, usadas por todas as outras classes.
+------ ImageboardClass.py - Classe responsável por resgatar informações de tópicos das imageboards.
+------ MessageBoxClass.py - Classe usada para emitir janelas de aviso e erro.
+------ WindowHandler.py - Classe usada como gerenciador principal da janela, fazendo o processo de recolher
+       informações inseridas na janela e iniciando o processo de download.
+
+- Uso de arquivo de configurações (imageboards.ini) para definir imageboards suportadas pelo programa:
+--- O usuário poderá inserir novas imageboards por conta própria, editando o arquivo imageboards.ini.
+--- Cada imageboard inserida deverá ter as seguintes características:
+------ Um nome de seção (Ex: [4chan]).
+------ Um nome de exibição e sua URL separados por um hífen (Ex: NAME = 4chan - https://www.4chan.org)
+------ Um template para a URL de tópicos da API em .json (Ex: https://a.4cdn.org/{0}/thread/{1}.json)
+------ Um template para a URL de imagens (Ex: https://i.4cdn.org/{0}/{1})  
+
+- Novas funções adicionadas:
+--- Opção de salvamento de arquivos (Salvar tudo, Apenas imagens, Apenas vídeos).
+--- CheckBox para criação de subpasta, semelhante a versão anterior.
+--- CheckBox para substituição de arquivos já existentes na pasta escolhida pelo usuário.
+--- CheckBox para abrir a pasta de destino depois que o processo de download for concluído.
+--- Download dos arquivos exibirá o nome do arquivo e o seu tamanho.
+
+#-------------------------------------------------------------------------------------------------------------------
+
 VERSÃO 1.7 - Linux/Windows:
 - Adicionado menu de opções no programa.
 - Adicionada barra de progresso para os downloads.
