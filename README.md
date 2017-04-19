@@ -26,6 +26,8 @@
 - Criar subpasta para o tópico (com o nome do tópico e a ID, ex: Tópico-[123456])
 - Selecionar o tipo de arquivo a ser salvo (Salvar tudo, Apenas imagens, Apenas vídeos)
 
+<br />
+
 ![Boards Image Downloader](http://i.imgur.com/wfy9U48.png)
 
 ### [Verifique o CHANGELOG para maiores informações sobre novas versões!](https://raw.github.com/Wolfterro/Boards-Image-Downloader/master/CHANGELOG.txt)
